@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "795025967735",
+    "project_id": "shigo-f6599",
+    "storage_bucket": "shigo-f6599.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795025967735:android:10ce27aaa2049cfe389472",
+        "android_client_info": {
+          "package_name": "com.shi.shigo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795025967735-3djfnkqj105ig7dkc7363emvkus7n9as.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0kaUfBYeuiGZ-jWugwdJ6TQbbIlWXjDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795025967735-3djfnkqj105ig7dkc7363emvkus7n9as.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "795025967735-j9824plh9se2i25inrn6tjcavra4al7m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "NomoSiOS.Shigo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
