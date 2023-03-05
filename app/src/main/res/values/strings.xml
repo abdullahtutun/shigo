@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Shigo</string>
+
+    <!-- Login -->
+    <string name="deadline">Termin - Görüşme</string>
+    <string name="email">E-mail</string>
+    <string name="password">Şifre</string>
+    <string name="forgot_password">Şifremi Unuttum</string>
+    <string name="login">Giriş Yap</string>
+    <string name="register">Üye Ol</string>
+    <string name="warning_email">Geçerli bir email adresi giriniz</string>
+    <string name="warning_password">Şifrenizi giriniz</string>
+    <string name="warning_login">Email ya da şifre yanlış</string>
+
+    <!-- Register -->
+    <string name="name">İsminiz</string>
+    <string name="password_again">Şifre Tekrar</string>
+    <string name="warning_name">İsim boş bırakılamaz</string>
+    <string name="warning_pass_match">Şifreler eşleşmiyor</string>
+
+    <!-- Bottom Nav -->
+    <string name="home">Anasayfa</string>
+    <string name="search">Keşfet</string>
+    <string name="home_box">Anasayfa</string>
+    <string name="cart">Sepet</string>
+    <string name="profile">Profil</string>
+
 </resources>
