@@ -6,20 +6,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.shi.shigo.R
 import com.shi.shigo.databinding.FragmentRegisterBinding
+import com.shi.shigo.viewmodel.RegisterViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private var email: String = ""
     private var password: String = ""
     private var passwordAgain: String = ""
     private var name: String = ""
+    private lateinit var auth: FirebaseAuth
+    private val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        auth = Firebase.auth
+
+
     }
 
     override fun onCreateView(
@@ -29,6 +41,12 @@ class RegisterFragment : Fragment() {
         binding = FragmentRegisterBinding.inflate(layoutInflater, container,false)
 
         init()
+
+        viewModel.registerResponse.observe(viewLifecycleOwner) { response ->
+            if(response){
+                onLogin(null)
+            }
+        }
 
         return binding.root
     }
@@ -44,10 +62,10 @@ class RegisterFragment : Fragment() {
         name = binding.etName.text.toString().trim()
         password = binding.etPassword.text.toString().trim()
         passwordAgain = binding.etPasswordAgain.text.toString().trim()
+
         if(checkRequirements()){
-
+            viewModel.register(email, password, name)
         }
-
     }
 
     private fun checkRequirements(): Boolean{
@@ -70,8 +88,8 @@ class RegisterFragment : Fragment() {
     private fun String.isValidEmail() =
         isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
-    private fun onLogin(v: View){
-        binding.root.findNavController().popBackStack()
+    private fun onLogin(v: View?){
+        findNavController().popBackStack()
     }
 
 }

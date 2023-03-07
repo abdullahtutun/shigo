@@ -10,23 +10,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.navigation.Navigation
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.shi.shigo.R
 import com.shi.shigo.databinding.FragmentLoginBinding
+import com.shi.shigo.viewmodel.LoginViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private var isShowPassword = false
     private var email: String = ""
     private var password: String = ""
-    private lateinit var auth: FirebaseAuth
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        auth = Firebase.auth
+
     }
 
     override fun onCreateView(
@@ -36,6 +38,12 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(layoutInflater, container,false)
 
         initUI()
+
+        viewModel.loginResponse.observe(viewLifecycleOwner){response ->
+            if(response){
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+            }
+        }
 
         return binding.root
     }
@@ -47,7 +55,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun onRegister(v: View){
-        Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_registerFragment)
+        findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
     }
 
     private fun onLogin(v: View){
@@ -55,7 +63,8 @@ class LoginFragment : Fragment() {
         password = binding.etPassword.text.toString().trim()
 
         if(checkRequirements()){
-            Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_homeFragment)
+            viewModel.login(email, password)
+
         }
     }
 

@@ -17,6 +17,7 @@
     <string name="password_again">Şifre Tekrar</string>
     <string name="warning_name">İsim boş bırakılamaz</string>
     <string name="warning_pass_match">Şifreler eşleşmiyor</string>
+    <string name="register_is_success">Hesabınız başarıyla oluşturuldu</string>
 
     <!-- Bottom Nav -->
     <string name="home">Anasayfa</string>

@@ -3,6 +3,7 @@ package com.shi.shigo
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.FrameLayout
@@ -11,11 +12,17 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationBarItemView
+import com.google.firebase.auth.FirebaseAuth
 import com.shi.shigo.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    @Inject
+    lateinit var auth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setBottomNavigation()
         hideSplashUI()
 
-
+        checkLoginState()
     }
 
     private fun initBottomNavigation() {
@@ -61,5 +68,26 @@ class MainActivity : AppCompatActivity() {
         iconViewParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50F, resources.displayMetrics).toInt()
         iconViewParams.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50F, resources.displayMetrics).toInt()
         iconView.layoutParams = iconViewParams
+    }
+
+    private fun checkLoginState(){
+        val currentUser = auth.currentUser
+        Log.d("aaa", currentUser?.displayName.toString())
+
+        if(currentUser != null){
+            startDestinationFragment(R.id.homeFragment)
+        }
+
+    }
+
+    private fun startDestinationFragment(destinationId: Int) {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as? NavHostFragment
+        val navController = navHostFragment?.navController
+        val navGraph = navController?.navInflater?.inflate(R.navigation.nav_main)
+        navGraph?.setStartDestination(destinationId)
+        if (navGraph != null) {
+            navController?.graph = navGraph
+        }
     }
 }
