@@ -29,11 +29,6 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater, container,false)
 
-        binding.buttonLogOut.setOnClickListener {
-            auth.signOut()
-            findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
-        }
-
         return binding.root
 
     }

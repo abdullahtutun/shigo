@@ -15,26 +15,31 @@ class RegisterViewModel @Inject constructor(private val auth: FirebaseAuth): Vie
     var registerResponse: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
     fun register(email: String, password: String, name: String){
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(appContext, R.string.register_is_success, Toast.LENGTH_SHORT).show()
+        try {
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(appContext, R.string.register_is_success, Toast.LENGTH_SHORT).show()
 
-                    val user = auth.currentUser
-                    val profileUpdates = userProfileChangeRequest {
-                        displayName = name
-                    }
-                    user?.updateProfile(profileUpdates)?.addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-
+                        val user = auth.currentUser
+                        val profileUpdates = userProfileChangeRequest {
+                            displayName = name
                         }
-                    }
-                    registerResponse.value = true
+                        user?.updateProfile(profileUpdates)?.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
 
+                            }
+                        }
+                        registerResponse.value = true
+
+                    }
+                }.addOnFailureListener { exception ->
+                    Toast.makeText(appContext, exception.localizedMessage, Toast.LENGTH_SHORT).show()
+                    registerResponse.value = false
                 }
-            }.addOnFailureListener { exception ->
-                Toast.makeText(appContext, exception.localizedMessage, Toast.LENGTH_SHORT).show()
-                registerResponse.value = false
-            }
+        } catch (e: Exception) {
+
+        }
+
     }
 }

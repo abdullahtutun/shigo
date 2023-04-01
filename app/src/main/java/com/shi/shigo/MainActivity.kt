@@ -8,6 +8,7 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -29,7 +30,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initBottomNavigation()
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         setBottomNavigation()
         hideSplashUI()
 
@@ -39,12 +41,13 @@ class MainActivity : AppCompatActivity() {
     private fun initBottomNavigation() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
-        binding.bottomNavigation.setupWithNavController(navController)
 
+        binding.bottomNavigation.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.loginFragment -> binding.bottomNavigation.visibility = View.GONE
                 R.id.registerFragment -> binding.bottomNavigation.visibility = View.GONE
+                R.id.forgotPasswordFragment -> binding.bottomNavigation.visibility = View.GONE
                 else -> binding.bottomNavigation.visibility = View.VISIBLE
             }
         }
@@ -55,7 +58,9 @@ class MainActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             binding.navHostFragment.visibility = View.VISIBLE
             binding.layoutSplash.clSplash.visibility = View.GONE
+            initBottomNavigation()
         }, 2000)
+
     }
 
     private fun setBottomNavigation(){
@@ -72,7 +77,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkLoginState(){
         val currentUser = auth.currentUser
-        Log.d("aaa", currentUser?.displayName.toString())
 
         if(currentUser != null){
             startDestinationFragment(R.id.homeFragment)
@@ -87,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         val navGraph = navController?.navInflater?.inflate(R.navigation.nav_main)
         navGraph?.setStartDestination(destinationId)
         if (navGraph != null) {
-            navController?.graph = navGraph
+            navController.graph = navGraph
         }
     }
 }

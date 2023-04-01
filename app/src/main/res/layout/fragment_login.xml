@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.LoginFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@color/dark_blue"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/ivGermany"
             android:layout_width="100dp"
             android:layout_height="70dp"
-            android:src="@drawable/germany_flag"/>
+            android:src="@drawable/germany_flag" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/ivTurkey"
             android:layout_width="100dp"
             android:layout_height="70dp"
-            android:src="@drawable/turkey_flag"/>
+            android:src="@drawable/turkey_flag" />
     </LinearLayout>
 
     <TextView
@@ -35,19 +45,23 @@
         android:layout_marginTop="10dp"
         android:background="@color/dark_blue"
         android:gravity="center"
-        android:layout_marginBottom="40dp"
         android:text="@string/deadline"
         android:textColor="@color/white"
-        android:textSize="30sp" />
-
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:background="@color/black"
         android:padding="10dp"
-        android:layout_margin="20dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deadLine">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -69,14 +83,14 @@
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_edittext"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:lines="1"
                     android:maxLines="1"
                     android:paddingStart="10dp"
                     android:singleLine="true"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/bg_edittext"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -106,9 +120,9 @@
                         android:id="@+id/ivHidePassw"
                         android:layout_width="23dp"
                         android:layout_height="23dp"
+                        android:layout_alignRight="@+id/etPassword"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="15dp"
-                        android:layout_alignRight="@+id/etPassword"
                         android:src="@drawable/hidden_eye"
                         app:tint="@color/black" />
                 </RelativeLayout>
@@ -117,11 +131,11 @@
                     android:id="@+id/tvForgotPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="14dp"
                     android:text="@string/forgot_password"
-                    android:textStyle="bold"
-                    android:layout_marginStart="10dp"
                     android:textColor="@color/orange"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rlPassword" />
 
@@ -130,27 +144,85 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="46dp"
-                    android:text="@string/login"
                     android:backgroundTint="@color/dark_blue"
+                    android:text="@string/login"
+                    android:textAllCaps="false"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rlPassword" />
 
+                <TextView
+                    android:id="@+id/tvOtherOptions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/other_options"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="50dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvOtherOptions">
+
+                    <ImageView
+                        android:id="@+id/ivInstagram"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_instagram"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/ivGoogle"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--<ImageView
+                        android:id="@+id/ivTiktok"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_tiktok"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/ivGoogle"
+                        app:layout_constraintStart_toEndOf="@+id/ivInstagram"
+                        app:layout_constraintTop_toTopOf="parent" />-->
+
+                    <ImageView
+                        android:id="@+id/ivGoogle"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_google"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivInstagram"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
+        android:backgroundTint="@color/white"
         android:text="@string/register"
-        android:backgroundTint="@color/dark_blue"
-        android:textColor="@color/white"
-        android:textStyle="bold"/>
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

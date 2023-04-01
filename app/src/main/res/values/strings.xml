@@ -11,6 +11,10 @@
     <string name="warning_email">Geçerli bir email adresi giriniz</string>
     <string name="warning_password">Şifrenizi giriniz</string>
     <string name="warning_login">Email ya da şifre yanlış</string>
+    <string name="submit">Gönder</string>
+    <string name="reset_password">Şifreyi Yenile</string>
+    <string name="other_options">Diğer Seçenekler</string>
+    <string name="successful_reset_email">Şifre yenilemek için gerekli email başarıyla gönderildi</string>
 
     <!-- Register -->
     <string name="name">İsminiz</string>
@@ -25,5 +29,9 @@
     <string name="home_box">Anasayfa</string>
     <string name="cart">Sepet</string>
     <string name="profile">Profil</string>
+
+    <!-- Basket -->
+    <string name="balance">Bakiye</string>
+    <string name="get_shi">Shi Edin</string>
 
 </resources>
